@@ -11,7 +11,7 @@ o.pumheight = 10
 o.showtabline = 2
 o.showmode = false
 o.clipboard = "unnamedplus"
-o.scrolloff = 3
+o.scrolloff = 5
 o.sidescrolloff = 5
 
 -- Numbers
