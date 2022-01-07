@@ -41,7 +41,12 @@ mapper('n','<A-h>','<C-w>h')
 --faster scrolling
 mapper('n','<C-j>','10<C-e>')
 mapper('n','<C-k>','10<C-y>')
+--copy 
+mapper('n','<leader>c','vi(y')
 
+--golang format
+mapper('n','<leader>f',':GoImport<CR>')
+mapper('n','<leader>s',':GoFillStruct<CR>')
 
 vim.g.go_highlight_types = 1
 vim.g.go_highlight_fields = 1

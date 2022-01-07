@@ -21,7 +21,8 @@ call plug#begin(stdpath('data').'/plugged')
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
 
-    "Plug 'leafOfTree/vim-svelte-plugin'
+    Plug 'ray-x/go.nvim'
+    Plug 'akinsho/toggleterm.nvim'
 call plug#end()
 ]])
 

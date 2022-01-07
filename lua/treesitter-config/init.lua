@@ -15,5 +15,10 @@ require'nvim-treesitter.configs'.setup {
   },
   autopairs = {
     enable = true
+  },
+  indent = {
+    enable = true
   }
 }
+--require('nvim-treesitter.install').compilers = {"cl","clang","gcc"}
+require('nvim-treesitter.install').compilers = {"clang"}
