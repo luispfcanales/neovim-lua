@@ -1,3 +1,5 @@
+local on_windows = vim.loop.os_uname().version:match 'Windows'
+
 local mapper = function(mode, key, result)
   vim.api.nvim_set_keymap(mode, key, result, { noremap = true, silent = true, expr = false })
 end
@@ -5,14 +7,19 @@ end
 -- Define Mapleader
 vim.g.mapleader = ','
 
--- Files open configs
-mapper('n', '<leader>fv', ':tabnew<CR>:e ~/AppData/Local/nvim/lua/plugins/init.lua<CR>')
-mapper('n', '<leader>fs', ':tabnew<CR>:e ~/AppData/Local/nvim/lua/settings.lua<CR>')
-mapper('n', '<leader>fk', ':tabnew<CR>:e ~/AppData/Local/nvim/lua/keymaps.lua<CR>')
-mapper('n', '<leader>fi', ':tabnew<CR>:e ~/AppData/Local/nvim/init.lua<CR>')
+local init,settings,keymaps,plugins = 'init.lua','lua/settings.lua','lua/keymaps.lua','lua/plugins/init.lua'
+local routeConfigNvim = ':e ~/.config/nvim/'
+if on_windows then
+  routeConfigNvim = ':e ~/AppData/Local/nvim/'
+end
+mapper('n', '<leader>fv', routeConfigNvim .. plugins .. '<CR>')
+mapper('n', '<leader>fs', routeConfigNvim .. settings .. '<CR>')
+mapper('n', '<leader>fk', routeConfigNvim .. keymaps .. '<CR>')
+mapper('n', '<leader>fi', routeConfigNvim .. init .. '<CR>')
 
 mapper('n', '<leader>d', ':NvimTreeToggle<CR>')
 mapper('i', '<A-i>', '<ESC>')
+mapper('i', 'kj', '<ESC>')
 mapper('v', '<A-i>', '<ESC>')
 
 -- Exit and save
@@ -24,13 +31,8 @@ mapper('n', '<Esc>', ':noh<CR>')
 
 -- moved in tabs
 mapper('n','<TAB>',':tabnext<CR>')
--- open terminal new tab
-mapper('v', '<leader>x', ':tabnew<CR>:ter<CR>i')
-mapper('n', '<leader>x', ':tabnew<CR>:ter<CR>i')
--- Get out of the Terminal
 mapper('t', '<A-i>', '<C-\\><C-n>')
 mapper('t', '<leader>ef', '<C-\\><C-n>:q!<CR><CR>')
-
 
 -- moved splits
 mapper('n','<A-j>','<C-w>j')
@@ -47,25 +49,19 @@ mapper('n','<leader>c','vi(y')
 --golang format
 mapper('n','<leader>f',':GoImport<CR>')
 mapper('n','<leader>s',':GoFillStruct<CR>')
+mapper('n','<leader>ad',':GoAddTag<CR>')
+mapper('n','<leader>x',':GoRmTag<CR>')
 
-vim.g.go_highlight_types = 1
-vim.g.go_highlight_fields = 1
-vim.g.go_highlight_function_calls = 1
-vim.g.go_highlight_format_strings = 1
-vim.g.go_highlight_operators = 1
-vim.g.go_highlight_structs = 1
-vim.g.go_highlight_methods = 1
-vim.g.go_highlight_functions = 1
-vim.g.go_highlight_build_constraints = 1
-vim.g.go_highlight_extra_types = 1
-vim.g.go_highlight_function_arguments = 1
-vim.g.go_highlight_variable_assignments = 1
+--split vertical
+mapper('n','<leader><space>',':vs<CR><C-w>l<CR>')
+
+--indent lines
+mapper('v','<','<gv')
+mapper('v','>','>gv')
+mapper('n','<A-j>',':m .+1<CR>==')
+mapper('n','<A-k>',':m .-2<CR>==')
+--call to telescope find files
+mapper("n", "<leader>m", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
 
 -- Pass to lua
-vim.cmd([[
-nnoremap K :m .-2<CR>==
-nnoremap J :m .+1<CR>==
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap J :m '>+1<CR>gv=gv
-silent! colorscheme  tokyonight
-]])
+vim.cmd([[ silent! colorscheme  tokyonight ]])

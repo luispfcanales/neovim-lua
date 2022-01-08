@@ -11,7 +11,7 @@ o.pumheight = 10
 o.showtabline = 2
 o.showmode = false
 o.clipboard = "unnamedplus"
-o.scrolloff = 5
+o.scrolloff = 8
 o.sidescrolloff = 5
 
 -- Numbers
@@ -59,6 +59,4 @@ o.backup = false
 o.lazyredraw = true
 -- Set zsh as shell (which zsh)
 -- o.shell = "/usr/bin/bash"
-cmd([[
-set tabline=%t\ %M
-]])
+cmd([[ set tabline=%t\ %M ]])

@@ -23,6 +23,16 @@ call plug#begin(stdpath('data').'/plugged')
 
     Plug 'ray-x/go.nvim'
     Plug 'akinsho/toggleterm.nvim'
+
+    "shade split
+    Plug 'sunjon/shade.nvim'
+    
+    "telescope
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    "lspsaga
+    "Plug 'glepnir/lspsaga.nvim'
+
 call plug#end()
 ]])
 
