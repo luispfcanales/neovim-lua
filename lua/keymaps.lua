@@ -19,7 +19,6 @@ mapper('n', '<leader>fi', routeConfigNvim .. init .. '<CR>')
 
 mapper('n', '<leader>d', ':NvimTreeToggle<CR>')
 mapper('i', '<A-i>', '<ESC>')
-mapper('i', 'kj', '<ESC>')
 mapper('v', '<A-i>', '<ESC>')
 
 -- Exit and save
