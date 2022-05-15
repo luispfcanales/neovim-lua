@@ -7,7 +7,7 @@ end
 -- Define Mapleader
 vim.g.mapleader = ','
 
-local init,settings,keymaps,plugins = 'init.lua','lua/settings.lua','lua/keymaps.lua','lua/plugins/init.lua'
+local init,settings,keymaps,plugins = 'init.lua','lua/settings.lua','lua/keymaps.lua','lua/load-plugins/init.lua'
 local routeConfigNvim = ':e ~/.config/nvim/'
 if on_windows then
   routeConfigNvim = ':e ~/AppData/Local/nvim/'
@@ -28,8 +28,10 @@ mapper('n', '<leader>ef', ':q!<CR>')
 -- use ESC to turn off search highlighting
 mapper('n', '<Esc>', ':noh<CR>')
 
--- moved in tabs
-mapper('n','<TAB>',':tabnext<CR>')
+-- moved in tabs buffers
+mapper('n','<TAB>',':bn<CR>')
+mapper('n','<S-TAB>',':bp<CR>')
+mapper('n','<A-x>',':bd<CR>')
 mapper('t', '<A-i>', '<C-\\><C-n>')
 mapper('t', '<leader>ef', '<C-\\><C-n>:q!<CR><CR>')
 
@@ -46,21 +48,22 @@ mapper('n','<C-k>','10<C-y>')
 mapper('n','<leader>c','vi(y')
 
 --golang format
-mapper('n','<leader>f',':GoImport<CR>')
-mapper('n','<leader>s',':GoFillStruct<CR>')
-mapper('n','<leader>ad',':GoAddTag<CR>')
-mapper('n','<leader>x',':GoRmTag<CR>')
+--mapper('n','<leader>s',':GoFillStruct<CR>')
+mapper('n','<leader>ad',':GoAddTags<CR>')
+mapper('n','<leader>x',':GoClearTags<CR>')
 
---split vertical
-mapper('n','<leader><space>',':vs<CR><C-w>l<CR>')
+--split vertical 
+local triggerFindfile = "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
+local splitRight = ":vs<CR><C-w>l<CR>"
+mapper('n','<leader><space>',splitRight)
+mapper('n','<A-n>',splitRight .. triggerFindfile )
+mapper("n", "<leader>m", triggerFindfile)
 
 --indent lines
 mapper('v','<','<gv')
 mapper('v','>','>gv')
 mapper('n','<A-j>',':m .+1<CR>==')
 mapper('n','<A-k>',':m .-2<CR>==')
---call to telescope find files
-mapper("n", "<leader>m", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
 
 -- Pass to lua
 vim.cmd([[ silent! colorscheme  tokyonight ]])

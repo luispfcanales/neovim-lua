@@ -1,9 +1,14 @@
 require('settings')
-require('plugins')
 require('keymaps')
+require('load-plugins')
+
+require('nvimtree-config')
+require('tokyonight-config')
+require('lualine-config')
+require('autopairs-config')
+require('colorizer-config')
 require('treesitter-config')
+
 require('lsp')
-require('gonvim-config')
+require('nvim-go-config')
 require('toggleterm-config')
-require('shade-config')
---require('lspsaga-config') //bugs in preview definition a nil value
