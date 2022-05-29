@@ -8,6 +8,8 @@ require('lualine-config')
 require('autopairs-config')
 require('colorizer-config')
 require('treesitter-config')
+require('twilight-config')
+require('lightspeed-config')
 
 require('lsp')
 require('nvim-go-config')

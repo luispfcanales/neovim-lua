@@ -58,5 +58,5 @@ o.backup = false
 
 o.lazyredraw = true
 -- Set zsh as shell (which zsh)
--- o.shell = "/usr/bin/bash"
-cmd([[ set tabline=%t\ %M ]])
+--o.shell = "/usr/bin/bash"
+--cmd([[ set tabline=%t\ %M ]])

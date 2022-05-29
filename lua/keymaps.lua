@@ -9,8 +9,11 @@ vim.g.mapleader = ','
 
 local init,settings,keymaps,plugins = 'init.lua','lua/settings.lua','lua/keymaps.lua','lua/load-plugins/init.lua'
 local routeConfigNvim = ':e ~/.config/nvim/'
+
+local routeSnipConfig = '~/.config/nvim/snippets'
 if on_windows then
   routeConfigNvim = ':e ~/AppData/Local/nvim/'
+  routeSnipConfig = '~/AppData/Local/nvim/snippets'
 end
 mapper('n', '<leader>fv', routeConfigNvim .. plugins .. '<CR>')
 mapper('n', '<leader>fs', routeConfigNvim .. settings .. '<CR>')
@@ -31,13 +34,13 @@ mapper('n', '<Esc>', ':noh<CR>')
 -- moved in tabs buffers
 mapper('n','<TAB>',':bn<CR>')
 mapper('n','<S-TAB>',':bp<CR>')
-mapper('n','<A-x>',':bd<CR>')
+mapper('n','<A-x>',':bd!<CR>')
 mapper('t', '<A-i>', '<C-\\><C-n>')
-mapper('t', '<leader>ef', '<C-\\><C-n>:q!<CR><CR>')
+mapper('t', '<leader>x', '<C-\\><C-n>:bd!<CR><CR>')
 
 -- moved splits
-mapper('n','<A-j>','<C-w>j')
-mapper('n','<A-k>','<C-w>k')
+--mapper('n','<A-j>','<C-w>j')
+--mapper('n','<A-k>','<C-w>k')
 mapper('n','<A-l>','<C-w>l')
 mapper('n','<A-h>','<C-w>h')
 
@@ -65,5 +68,13 @@ mapper('v','>','>gv')
 mapper('n','<A-j>',':m .+1<CR>==')
 mapper('n','<A-k>',':m .-2<CR>==')
 
+--keymapping to lightspeed plugin
+mapper('n','s','<Plug>Lightspeed_s')
+mapper('n','S','<Plug>Lightspeed_S')
 -- Pass to lua
-vim.cmd([[ silent! colorscheme  tokyonight ]])
+
+vim.cmd("silent! colorscheme  tokyonight ")
+vim.cmd('let g:vsnip_snippet_dir = "'.. routeSnipConfig ..'"')
+
+
+mapper("n", "<leader>z", "<cmd>lua require'myPlugins'.GoRun()<CR>")

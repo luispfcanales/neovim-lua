@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  use { 'folke/twilight.nvim' }
   use 'windwp/nvim-ts-autotag'
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-autopairs'
@@ -43,6 +44,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
   use {
     "akinsho/toggleterm.nvim",
     tag = 'v1.*'
@@ -51,6 +54,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use 'ggandor/lightspeed.nvim'
 
   use 'crispgm/nvim-go'
   use 'ray-x/lsp_signature.nvim'

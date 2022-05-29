@@ -15,6 +15,7 @@ toggle_term.setup{
   direction = 'float',
   close_on_exit = true,
   shell = vim.o.shell,
+  --shell = powershell,
   -- This field is only relevant if direction is set to 'float'
   float_opts = {
     border = 'curved',
