@@ -8,32 +8,6 @@
     ],
     "description": "ErrNil definition template Error"
   },
-    "GoStruct":{
-    "prefix": ["GoSTRUCT"],
-    "body": [
-      "type $0 struct{",
-      "}"
-    ],
-    "description": "GoSTRUCT definition template Struct"
-  },
-  "GoMAIN":{
-    "prefix": ["GoMAIN"],
-    "body": [
-      "package main",
-      "\t",
-      "func main(){",
-      "\t$0",
-      "}"
-    ],
-    "description": "MainGo definition template Main"
-  },
-  "GoPACK":{
-    "prefix": ["GoPACK"],
-    "body": [
-      "package ${1:PACKAGE_NAME}"
-    ],
-    "description": "GoPACK definition template GoPACK"
-  },
   "GoHANDLER":{
     "prefix": ["GoHANDLER"],
     "body": [
