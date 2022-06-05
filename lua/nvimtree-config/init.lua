@@ -1,43 +1,44 @@
-vim.g.nvim_tree_root_folder_modifier = ':~'
-vim.g.vim_tree_tab_open = 1
+vim.g.vim_tree_open_on_tab = 1
 vim.g.nvim_tree_width_allow_resize = 1
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_add_trailing = 0
-vim.g.nvim_tree_group_empty = 0
-vim.g.nvim_tree_icon_padding = ' '
-
-vim.g.nvim_tree_icons = {
-  default = '',
-  symlink = '',
-  git = {
-    unstaged = '✗',
-    staged = '✓',
-    unmerged = '',
-    renamed = '➜',
-    untracked = '★',
-    deleted = '',
-    ignored = '◌',
-  },
-  folder = {
-    default = '',
-    open = '',
-    arrow_open = '>',
-    arrow_closed = '#',
-    empty = ' ',
-    empty_open = ' ',
-    symlink = '',
-    symlink_open = '',
-  },
-  lsp = { hint = ' ', info = ' ', warning = ' ', error = ' ' },
-}
 
 require('nvim-tree').setup({
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_netrw = false,
   renderer = {
+    group_empty = false,
+    add_trailing = false,
+    icons = {
+      glyphs = {
+        default = '',
+        symlink = '',
+        git = {
+          unstaged = '✗',
+          staged = '✓',
+          unmerged = '',
+          renamed = '➜',
+          untracked = '★',
+          deleted = '',
+          ignored = '◌',
+        },
+        folder = {
+          default = '',
+          open = '',
+          arrow_open = '>',
+          arrow_closed = '#',
+          empty = ' ',
+          empty_open = ' ',
+          symlink = '',
+          symlink_open = '',
+        },
+        --lsp = { hint = ' ', info = ' ', warning = ' ', error = ' ' },
+      },
+      padding = ' ',
+    },
     indent_markers = { enable = true },
+    root_folder_modifier = ':~',
+    highlight_opened_files = '3', -- adding
+    highlight_git = true,
   },
   actions = {
     open_file = {

@@ -73,8 +73,4 @@ mapper('n','s','<Plug>Lightspeed_s')
 mapper('n','S','<Plug>Lightspeed_S')
 -- Pass to lua
 
-vim.cmd("silent! colorscheme  tokyonight ")
-vim.cmd('let g:vsnip_snippet_dir = "'.. routeSnipConfig ..'"')
-
-
 mapper("n", "<leader>z", "<cmd>lua require'myPlugins'.GoRun()<CR>")

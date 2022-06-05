@@ -3,12 +3,11 @@ require('keymaps')
 require('load-plugins')
 
 require('nvimtree-config')
-require('tokyonight-config')
+require('rose-pine-config')
 require('lualine-config')
 require('autopairs-config')
 require('colorizer-config')
 require('treesitter-config')
-require('twilight-config')
 require('lightspeed-config')
 
 require('lsp')
