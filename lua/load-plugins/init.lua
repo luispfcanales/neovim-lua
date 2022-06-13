@@ -10,7 +10,6 @@ end
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  --use 'folke/tokyonight.nvim'
   use {
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -48,6 +47,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
 
   use {
     "akinsho/toggleterm.nvim",

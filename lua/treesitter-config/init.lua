@@ -10,7 +10,7 @@ treesitter.setup {
   },
   autotag = {
     enable = true,
-    filetypes = { "html" , "svelte" },
+    filetypes = { "html" , "svelte" ,"javascript","javascriptreact" },
   },
   rainbow = {
     enable = true,
