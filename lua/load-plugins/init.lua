@@ -50,6 +50,9 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
 
+  use { 'kkharji/lspsaga.nvim' }
+  use { 'lewis6991/gitsigns.nvim' }
+  use 'lukas-reineke/indent-blankline.nvim'
   use {
     "akinsho/toggleterm.nvim",
     tag = 'v1.*'

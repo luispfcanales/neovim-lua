@@ -11,7 +11,7 @@ o.pumheight = 10
 o.showtabline = 2
 o.showmode = false
 o.clipboard = "unnamedplus"
-o.scrolloff = 8
+o.scrolloff = 10
 o.sidescrolloff = 5
 
 -- Numbers
@@ -34,14 +34,14 @@ wo.linebreak = true
 -- Tabs to Spaces
 o.expandtab = true
 bo.expandtab = true
-
+o.tabstop = 4
 -- Correct level of indentation
-o.shiftwidth = 2
-bo.shiftwidth = 2
+o.shiftwidth = 4
+bo.shiftwidth = 4
 
 -- I have a special configuration for each file in ftplugin/
-o.softtabstop = 2
-bo.softtabstop = 2
+o.softtabstop = 4
+bo.softtabstop = 4
 
 -- Autoident
 o.autoindent = true
@@ -57,6 +57,7 @@ o.swapfile = false
 o.backup = false
 
 o.lazyredraw = true
+vim.opt.mouse = 'a'
 -- Set zsh as shell (which zsh)
 --o.shell = "/usr/bin/bash"
 --cmd([[ set tabline=%t\ %M ]])

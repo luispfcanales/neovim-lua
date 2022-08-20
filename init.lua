@@ -11,5 +11,8 @@ require('treesitter-config')
 require('lightspeed-config')
 
 require('lsp')
+require('gitsigns-config')
+require('identline-config')
 require('nvim-go-config')
 require('toggleterm-config')
+require('autocmd-files')

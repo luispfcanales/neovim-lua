@@ -54,23 +54,30 @@ mapper('n','<leader>c','vi(y')
 --mapper('n','<leader>s',':GoFillStruct<CR>')
 mapper('n','<leader>ad',':GoAddTags<CR>')
 mapper('n','<leader>x',':GoClearTags<CR>')
+mapper('n','<leader>ei',':GoIfErr<CR>')
 
 --split vertical 
 local triggerFindfile = "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
 local splitRight = ":vs<CR><C-w>l<CR>"
-mapper('n','<leader><space>',splitRight)
 mapper('n','<A-n>',splitRight .. triggerFindfile )
 mapper("n", "<leader>m", triggerFindfile)
 
 --indent lines
 mapper('v','<','<gv')
 mapper('v','>','>gv')
+mapper('n','>','>>')
+mapper('n','<','<<')
 mapper('n','<A-j>',':m .+1<CR>==')
 mapper('n','<A-k>',':m .-2<CR>==')
 
 --keymapping to lightspeed plugin
 mapper('n','s','<Plug>Lightspeed_s')
 mapper('n','S','<Plug>Lightspeed_S')
--- Pass to lua
 
-mapper("n", "<leader>z", "<cmd>lua require'myPlugins'.GoRun()<CR>")
+mapper('n','<A-s>','<cmd>Lspsaga rename<cr>')
+--gitsigns keys
+mapper('n','<leader><space>','<cmd>Gitsigns preview_hunk<cr>')
+mapper('n','\\df','<cmd>Gitsigns diffthis<cr>')
+
+--personal commands to execute
+mapper("n", "<leader>z", "<cmd>lua require'commands'.GoRun()<CR>")

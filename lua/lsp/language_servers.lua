@@ -12,8 +12,11 @@ local on_attach = function( client, bufnr )
   end
   buf_set_option("omnifunc","v:lua.vim.lsp.omnifunc")
   local key_binding_options = { noremap = true, silent = true }
-  buf_set_keymap("n","gd","<Cmd>lua vim.lsp.buf.definition()<CR>",key_binding_options)
-  buf_set_keymap("n","K","<Cmd>lua vim.lsp.buf.hover()<CR>",key_binding_options)
+  --go to definition
+  buf_set_keymap("n","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",key_binding_options)
+  --buf_set_keymap("n","K","<Cmd>lua vim.lsp.buf.hover()<CR>",key_binding_options)
+  buf_set_keymap("n","gd","<Cmd>Lspsaga preview_definition<CR>",key_binding_options)
+  buf_set_keymap("n","K","<Cmd>Lspsaga hover_doc<CR>",key_binding_options)
 end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()) 
@@ -40,4 +43,7 @@ nvim_lsp.svelte.setup {
 nvim_lsp.cssls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+}
+nvim_lsp.html.setup {
+  capabilities = capabilities,
 }
