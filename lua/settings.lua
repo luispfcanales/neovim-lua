@@ -34,14 +34,14 @@ wo.linebreak = true
 -- Tabs to Spaces
 o.expandtab = true
 bo.expandtab = true
-o.tabstop = 4
+o.tabstop = 2
 -- Correct level of indentation
-o.shiftwidth = 4
-bo.shiftwidth = 4
+o.shiftwidth = 2
+bo.shiftwidth = 2
 
 -- I have a special configuration for each file in ftplugin/
-o.softtabstop = 4
-bo.softtabstop = 4
+o.softtabstop = 2
+bo.softtabstop = 2
 
 -- Autoident
 o.autoindent = true
