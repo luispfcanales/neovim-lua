@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 treesitter.setup {
-  ensure_installed = { "go","svelte","javascript","typescript","css","json","lua","html","proto" },
+  ensure_installed = { "go","svelte","javascript","typescript","css","json","lua","html","proto","markdown" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,

@@ -21,17 +21,14 @@ end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()) 
 nvim_lsp.html.setup {
+  on_attach = on_attach,
   capabilities = capabilities,
 }
 nvim_lsp.gopls.setup {
-  capabilities = capabilities,
   on_attach = on_attach,
 }
 require "lsp_signature".setup({
   bind = true,
-  handlers_opts = {
-    border = "rounded"
-  },
 })
 nvim_lsp.tsserver.setup {
   capabilities = capabilities,

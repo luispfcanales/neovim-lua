@@ -9,7 +9,7 @@ o.shortmess = o.shortmess .. 'c'
 vim.opt.termguicolors = true
 o.pumheight = 10
 o.showtabline = 2
-o.showmode = false
+--o.showmode = false
 o.clipboard = "unnamedplus"
 o.scrolloff = 10
 o.sidescrolloff = 5
@@ -61,3 +61,4 @@ vim.opt.mouse = 'a'
 -- Set zsh as shell (which zsh)
 --o.shell = "/usr/bin/bash"
 --cmd([[ set tabline=%t\ %M ]])
+cmd([[ set laststatus=3 ]])

@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
     as = 'rose-pine',
     tag = 'v1.*'
   }
-  use 'norcalli/nvim-colorizer.lua'
+  use 'Akianonymus/nvim-colorizer.lua'
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
@@ -23,10 +23,10 @@ return require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+  --use {
+  --  'nvim-lualine/lualine.nvim',
+  --  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  --}
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -53,15 +53,15 @@ return require('packer').startup(function(use)
   use { 'kkharji/lspsaga.nvim' }
   use { 'lewis6991/gitsigns.nvim' }
   use 'lukas-reineke/indent-blankline.nvim'
-  use {
-    "akinsho/toggleterm.nvim",
-    tag = 'v1.*'
-  }
+  --use {
+  --  "akinsho/toggleterm.nvim",
+  --  tag = 'v1.*'
+  --}
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-  use 'ggandor/lightspeed.nvim'
+  --use 'ggandor/lightspeed.nvim'
 
   use 'crispgm/nvim-go'
   use 'ray-x/lsp_signature.nvim'

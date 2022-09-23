@@ -24,8 +24,8 @@ require('nvim-tree').setup({
         folder = {
           default = '',
           open = '',
-          arrow_open = '>',
-          arrow_closed = '#',
+         -- arrow_open = '>',
+         -- arrow_closed = '#',
           empty = ' ',
           empty_open = ' ',
           symlink = '',
@@ -43,6 +43,7 @@ require('nvim-tree').setup({
   actions = {
     open_file = {
       window_picker = { enable = true },
+      resize_window = true,
     },
   },
 
@@ -64,7 +65,7 @@ require('nvim-tree').setup({
   view = {
     width = 35,
     side = 'right',
-    auto_resize = false,
+    --auto_resize = false,
     mappings = {
       custom_only = false,
       list = {},

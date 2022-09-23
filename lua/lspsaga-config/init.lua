@@ -2,7 +2,7 @@ local status,lspsaga = pcall(require,'lspsaga')
 if not status then
   return
 end
-local lspsaga = require 'lspsaga'
+
 lspsaga.setup { -- defaults ...
   debug = false,
   use_saga_diagnostic_sign = true,
