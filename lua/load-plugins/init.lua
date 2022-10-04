@@ -23,15 +23,13 @@ return require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-  --use {
-  --  'nvim-lualine/lualine.nvim',
-  --  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  --}
 
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+  --use 'nvim-treesitter/nvim-treesitter-context' --use to context header
+
   use 'windwp/nvim-ts-autotag'
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-autopairs'
@@ -44,6 +42,10 @@ return require('packer').startup(function(use)
   }
 
   use 'neovim/nvim-lspconfig'
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
@@ -53,21 +55,14 @@ return require('packer').startup(function(use)
   use { 'kkharji/lspsaga.nvim' }
   use { 'lewis6991/gitsigns.nvim' }
   use 'lukas-reineke/indent-blankline.nvim'
-  --use {
-  --  "akinsho/toggleterm.nvim",
-  --  tag = 'v1.*'
-  --}
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-  --use 'ggandor/lightspeed.nvim'
 
   use 'crispgm/nvim-go'
   use 'ray-x/lsp_signature.nvim'
 
-  --markdown preview
-  -- install without yarn or npm
 use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,

@@ -7,7 +7,6 @@ require('rose-pine-config')
 require('autopairs-config')
 require('colorizer-config')
 require('treesitter-config')
---require('lightspeed-config')
 require('telescope-config')
 
 require('lsp')

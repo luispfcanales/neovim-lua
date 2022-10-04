@@ -49,7 +49,8 @@ mapper('n','<C-j>','10<C-e>')
 mapper('n','<C-k>','10<C-y>')
 --copy 
 mapper('n','<leader>c','vi(y')
-
+--delete inner of ""
+mapper('n','<leader>s','di"i')
 --golang format
 --mapper('n','<leader>s',':GoFillStruct<CR>')
 mapper('n','<leader>ad',':GoAddTags<CR>')
@@ -81,3 +82,4 @@ mapper('n','\\df','<cmd>Gitsigns diffthis<cr>')
 
 --personal commands to execute
 mapper("n", "<leader>z", "<cmd>lua require'commands'.GoRun()<CR>")
+mapper("n","<leader>rt","<cmd>GoTestFunc<cr>")

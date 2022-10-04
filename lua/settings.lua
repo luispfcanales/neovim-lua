@@ -2,6 +2,8 @@ vim.cmd('filetype plugin indent on')
 local g,o,bo,wo,cmd,fn = vim.g,vim.o,vim.bo,vim.wo,vim.cmd,vim.fn
 
 -- Syntax on!
+o.statusline = "%{%v:lua.require'nvim-navic'.get_location()%}"
+
 g.syntax_on = true
 o.synmaxcol = 1500
 
