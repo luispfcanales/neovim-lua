@@ -3,9 +3,9 @@ require('keymaps')
 require('load-plugins')
 
 require('nvimtree-config')
-require('gruvbox-config')
 require('autopairs-config')
 require('colorizer-config')
+require('gruvbox-config')
 require('treesitter-config')
 require('telescope-config')
 
