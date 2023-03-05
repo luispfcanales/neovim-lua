@@ -3,7 +3,7 @@ require('keymaps')
 require('load-plugins')
 
 require('nvimtree-config')
-require('rose-pine-config')
+require('gruvbox-config')
 require('autopairs-config')
 require('colorizer-config')
 require('treesitter-config')

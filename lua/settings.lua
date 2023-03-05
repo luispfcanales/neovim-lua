@@ -63,4 +63,7 @@ vim.opt.mouse = 'a'
 -- Set zsh as shell (which zsh)
 --o.shell = "/usr/bin/bash"
 --cmd([[ set tabline=%t\ %M ]])
-cmd([[ set laststatus=3 ]])
+cmd([[ 
+set laststatus=3 
+colorscheme gruvbox
+]])

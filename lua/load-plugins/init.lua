@@ -10,11 +10,8 @@ end
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use {
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    tag = 'v1.*'
-  }
+  use { "ellisonleao/gruvbox.nvim" }
+
   use 'Akianonymus/nvim-colorizer.lua'
   use {
     'kyazdani42/nvim-tree.lua',
