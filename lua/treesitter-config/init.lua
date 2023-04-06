@@ -5,7 +5,7 @@ end
 
 
 treesitter.setup {
-  ensure_installed = { "go","svelte","javascript","typescript","css","json","lua","html","proto","markdown" },
+  ensure_installed = { "go","svelte","javascript","typescript","css","json","lua","html","proto","markdown","vim","dart" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
