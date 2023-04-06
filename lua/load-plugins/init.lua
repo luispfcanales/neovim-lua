@@ -55,4 +55,11 @@ return require('packer').startup(function(use)
   use 'crispgm/nvim-go'
   use 'ray-x/lsp_signature.nvim'
 
+  use {
+    'akinsho/flutter-tools.nvim',
+    requires = {
+        'nvim-lua/plenary.nvim'
+    },
+  }
+
 end)

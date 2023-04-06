@@ -1,4 +1,4 @@
-local status,gruvbox = pcall('gruvbox')
+local status,gruvbox = pcall(require,'gruvbox')
 if not status then
   return
 end
@@ -6,7 +6,12 @@ gruvbox.setup({
   undercurl = true,
   underline = true,
   bold = true,
-  italic = true,
+  italic = {
+    string = false,
+    operators = true,
+    comments = true,
+    ...
+  },
   strikethrough = true,
   invert_selection = false,
   invert_signs = false,
