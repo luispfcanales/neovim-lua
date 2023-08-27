@@ -62,4 +62,5 @@ return require('packer').startup(function(use)
     },
   }
 
+  use 'vim-highlightedyank'
 end)

@@ -22,10 +22,6 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-nvim_lsp.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
 nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
@@ -39,10 +35,13 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.svelte.setup {
   capabilities = capabilities,
 }
+nvim_lsp.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 nvim_lsp.cssls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
-nvim_lsp.html.setup {
-  capabilities = capabilities,
-}
+
+nvim_lsp.anakin_language_server.setup{}

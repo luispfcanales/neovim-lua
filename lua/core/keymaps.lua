@@ -7,7 +7,7 @@ end
 -- Define Mapleader
 vim.g.mapleader = ','
 
-local init,settings,keymaps,plugins = 'init.lua','lua/settings.lua','lua/keymaps.lua','lua/load-plugins/init.lua'
+local init,settings,keymaps = 'init.lua','lua/core/settings.lua','lua/core/keymaps.lua'
 local routeConfigNvim = ':e ~/.config/nvim/'
 
 local routeSnipConfig = '~/.config/nvim/snippets'
@@ -15,12 +15,10 @@ if on_windows then
   routeConfigNvim = ':e ~/AppData/Local/nvim/'
   routeSnipConfig = '~/AppData/Local/nvim/snippets'
 end
-mapper('n', '<leader>fv', routeConfigNvim .. plugins .. '<CR>')
 mapper('n', '<leader>fs', routeConfigNvim .. settings .. '<CR>')
 mapper('n', '<leader>fk', routeConfigNvim .. keymaps .. '<CR>')
 mapper('n', '<leader>fi', routeConfigNvim .. init .. '<CR>')
 
-mapper('n', '<leader>d', ':NvimTreeToggle<CR>')
 mapper('i', '<A-i>', '<ESC>')
 mapper('v', '<A-i>', '<ESC>')
 
@@ -36,7 +34,7 @@ mapper('n','<TAB>',':bn<CR>')
 mapper('n','<S-TAB>',':bp<CR>')
 mapper('n','<A-x>',':bd!<CR>')
 mapper('t', '<A-i>', '<C-\\><C-n>')
-mapper('t', '<leader>x', '<C-\\><C-n>:bd!<CR><CR>')
+--mapper('t', '<leader>x', '<C-\\><C-n>:bd!<CR><CR>')
 
 -- moved splits
 --mapper('n','<A-j>','<C-w>j')
@@ -57,12 +55,6 @@ mapper('n','<leader>ad',':GoAddTags<CR>')
 mapper('n','<leader>x',':GoClearTags<CR>')
 mapper('n','<leader>ei',':GoIfErr<CR>')
 
---split vertical 
-local triggerFindfile = "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
-local splitRight = ":vs<CR><C-w>l<CR>"
-mapper('n','<A-n>',splitRight .. triggerFindfile )
-mapper("n", "<leader>m", triggerFindfile)
-
 --indent lines
 mapper('v','<','<gv')
 mapper('v','>','>gv')
@@ -71,9 +63,7 @@ mapper('n','<','<<')
 mapper('n','<A-j>',':m .+1<CR>==')
 mapper('n','<A-k>',':m .-2<CR>==')
 
---keymapping to lightspeed plugin
-mapper('n','s','<Plug>Lightspeed_s')
-mapper('n','S','<Plug>Lightspeed_S')
+mapper('n','G','Gzz')
 
 mapper('n','<A-s>','<cmd>Lspsaga rename<cr>')
 --gitsigns keys
@@ -81,5 +71,7 @@ mapper('n','<leader><space>','<cmd>Gitsigns preview_hunk<cr>')
 mapper('n','\\df','<cmd>Gitsigns diffthis<cr>')
 
 --personal commands to execute
-mapper("n", "<leader>z", "<cmd>lua require'commands'.GoRun()<CR>")
+mapper("n", "<leader>z", "<cmd>lua require'core.commands'.GoRun()<CR>")
 mapper("n","<leader>rt","<cmd>GoTestFunc<cr>")
+--
+mapper('n','<C-a>',":vertical sball<CR>")
