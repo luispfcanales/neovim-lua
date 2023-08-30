@@ -7,7 +7,10 @@ return {
       if not status then
         return
       end
-      vim.cmd([[colorscheme gruvbox]])
+      vim.cmd([[
+        colorscheme gruvbox
+        hi Normal ctermbg=NONE guibg=NONE
+      ]])
 
       gb.setup({
         undercurl = true,
@@ -25,11 +28,11 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = "", -- can be "hard", "soft" or empty string
+        contrast = "hard", -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
-        transparent_mode = false,
+        transparent_mode = true,
       })
     end,
   },
