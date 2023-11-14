@@ -75,3 +75,6 @@ mapper("n", "<leader>z", "<cmd>lua require'core.commands'.GoRun()<CR>")
 mapper("n","<leader>rt","<cmd>GoTestFunc<cr>")
 --
 mapper('n','<C-a>',":vertical sball<CR>")
+
+mapper('n','dw','vb_d')
+--mapper('n','<leader>d',":Neotree toggle show buffers rigth")

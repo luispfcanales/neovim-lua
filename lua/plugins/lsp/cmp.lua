@@ -60,13 +60,12 @@ return {
     local keymap = vim.keymap
     local on_attach = function(client,buf)
       local opts = { noremap = true, silent = true, buffer = buf }
-      --keymap.set("","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",opts)
-      keymap.set("n","<leader>gd","<Cmd>Telescope lsp_definitions<CR>",opts)
+      --keymap.set("n","<leader>gd","<Cmd>Telescope lsp_definitions<CR>",opts)
+      keymap.set("","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",opts)
       keymap.set("n","<leader>gi","<cmd>Telescope lsp_implementations<CR>", opts)
       --keymap.set("n", "W", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
       keymap.set("n","K",vim.lsp.buf.hover,opts)
       keymap.set("n","W",vim.diagnostic.open_float,opts)
-      --buf_set_keymap("n","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",key_binding_options)
     end
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
