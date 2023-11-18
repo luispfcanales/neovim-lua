@@ -9,8 +9,19 @@ return {
   },
   keys = {
       { "<leader>d", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-    },
-    config = function()
-      require("neo-tree").setup()
-    end,
+  },
+  config = function()
+    require("neo-tree").setup({
+      open_on_setup = true,
+      update_to_buf_dir = {
+          enable = true,
+      },
+      auto_close = true,
+      hijack_netrw = true,
+      auto_open = true,
+      open_on_tab = false,
+      lsp_diagnostics = false,
+    })
+  end,
+  --vim.g.neo_tree_side = 'right'
 }
