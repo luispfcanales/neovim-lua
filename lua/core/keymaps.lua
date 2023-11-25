@@ -7,7 +7,7 @@ end
 -- Define Mapleader
 vim.g.mapleader = ','
 
-local init,settings,keymaps = 'init.lua','lua/core/settings.lua','lua/core/keymaps.lua'
+local init,options,keymaps = 'init.lua','lua/core/options.lua','lua/core/keymaps.lua'
 local routeConfigNvim = ':e ~/.config/nvim/'
 
 local routeSnipConfig = '~/.config/nvim/snippets'
@@ -15,7 +15,7 @@ if on_windows then
   routeConfigNvim = ':e ~/AppData/Local/nvim/'
   routeSnipConfig = '~/AppData/Local/nvim/snippets'
 end
-mapper('n', '<leader>fs', routeConfigNvim .. settings .. '<CR>')
+mapper('n', '<leader>fo', routeConfigNvim .. options .. '<CR>')
 mapper('n', '<leader>fk', routeConfigNvim .. keymaps .. '<CR>')
 mapper('n', '<leader>fi', routeConfigNvim .. init .. '<CR>')
 
@@ -48,12 +48,7 @@ mapper('n','<C-k>','10<C-y>')
 --copy 
 mapper('n','<leader>c','vi(y')
 --delete inner of ""
-mapper('n','<leader>s','di"i')
---golang format
---mapper('n','<leader>s',':GoFillStruct<CR>')
-mapper('n','<leader>ad',':GoAddTags<CR>')
-mapper('n','<leader>x',':GoClearTags<CR>')
-mapper('n','<leader>ei',':GoIfErr<CR>')
+mapper('n','<leader>ds','di"i')
 
 --indent lines
 mapper('v','<','<gv')
@@ -68,13 +63,10 @@ mapper('n','G','Gzz')
 mapper('n','<A-s>','<cmd>Lspsaga rename<cr>')
 --gitsigns keys
 mapper('n','<leader><space>','<cmd>Gitsigns preview_hunk<cr>')
-mapper('n','\\df','<cmd>Gitsigns diffthis<cr>')
+mapper('n','<C-\\>','<cmd>Gvdiff<cr>')
+mapper('n','<leader>ac',[[<cmd>Gwrite<CR>:Git commit<CR>]])
 
---personal commands to execute
-mapper("n", "<leader>z", "<cmd>lua require'core.commands'.GoRun()<CR>")
-mapper("n","<leader>rt","<cmd>GoTestFunc<cr>")
 --
 mapper('n','<C-a>',":vertical sball<CR>")
 
 mapper('n','dw','vb_d')
---mapper('n','<leader>d',":Neotree toggle show buffers rigth")

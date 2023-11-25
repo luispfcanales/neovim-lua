@@ -24,24 +24,8 @@ return {
     cmp.setup({
       mapping = {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function()
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { "i", "s" }),
+        ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
       },
       snippet = {
         expand = function(args)
@@ -61,7 +45,7 @@ return {
     local on_attach = function(client,buf)
       local opts = { noremap = true, silent = true, buffer = buf }
       --keymap.set("n","<leader>gd","<Cmd>Telescope lsp_definitions<CR>",opts)
-      keymap.set("","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",opts)
+      keymap.set("n","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",opts)
       keymap.set("n","<leader>gi","<cmd>Telescope lsp_implementations<CR>", opts)
       --keymap.set("n", "W", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
       keymap.set("n","K",vim.lsp.buf.hover,opts)
