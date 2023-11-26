@@ -70,6 +70,7 @@ return {
     }
     lspconfig.svelte.setup {
       capabilities = capabilities,
+      on_attach = on_attach,
     }
     lspconfig.html.setup {
       on_attach = on_attach,

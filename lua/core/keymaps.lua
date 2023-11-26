@@ -64,7 +64,7 @@ mapper('n','<A-s>','<cmd>Lspsaga rename<cr>')
 --gitsigns keys
 mapper('n','<leader><space>','<cmd>Gitsigns preview_hunk<cr>')
 mapper('n','<C-\\>','<cmd>Gvdiff<cr>')
-mapper('n','<leader>ac',[[<cmd>Gwrite<CR>:Git commit<CR>]])
+--mapper('n','<leader>ac',[[<cmd>Gwrite<CR>:Git commit<CR>]])
 
 --
 mapper('n','<C-a>',":vertical sball<CR>")
