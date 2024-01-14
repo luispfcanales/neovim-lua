@@ -16,7 +16,7 @@ return{
       ensure_installed = { 
         "go","svelte","javascript","typescript","css",
         "json","lua","html","proto","markdown","vim",
-        "dart","python", 
+        "dart","python","c_sharp",
       },
       highlight = {
         enable = true,

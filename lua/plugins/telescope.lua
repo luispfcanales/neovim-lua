@@ -22,6 +22,7 @@ return {
           file_ignore_patterns = { "node_modules",".git",".cache","bin"},
         }),
       }
+    require("telescope").load_extension("git_worktree")
     local keymap = vim.keymap
     local opts = { noremap = true, silent = true, buffer = buf }
 

@@ -16,7 +16,7 @@ return{
     })
     --golang format
     vim.keymap.set("n", "<leader>fs", "<CMD>GoFillStruct<CR>", { desc = "Fill struct" })
-    vim.keymap.set("n", "<leader>ad", "<CMD>GoAddTags<CR>", { desc = "Add tags" })
+    vim.keymap.set("n", "<leader>ad", "<CMD>GoAddTag<CR>", { desc = "Add tags" })
     vim.keymap.set("n", "<leader>da", "<CMD>GoClearTags<CR>", { desc = "Clear tags" })
     vim.keymap.set("n", "<leader>ei", "<CMD>GoIfErr<CR>", { desc = "IfEff completion" })
     vim.keymap.set("n", "<leader>rt", "<CMD>GoTest -v<CR>", { desc = "Run Test" })
