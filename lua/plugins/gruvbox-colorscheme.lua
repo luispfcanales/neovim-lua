@@ -7,10 +7,10 @@ return {
       if not status then
         return
       end
-      --vim.cmd([[
-      --  colorscheme gruvbox
-      --  hi Normal ctermbg=NONE guibg=NONE
-      --]])
+      vim.cmd([[
+        colorscheme gruvbox
+      ]])
+      --hi Normal ctermbg=NONE guibg=NONE
 
       gb.setup({
         undercurl = true,
