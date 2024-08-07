@@ -1,6 +1,6 @@
 return {
   "OmniSharp/omnisharp-vim",
-  ft = { "cs" },  -- Solo carga el plugin para archivos .cs
+  ft = { "cs", "razor" },  -- Solo carga el plugin para archivos .cs
   config = function()
     ----ESTO CUANDO SE INSTALA MANUALMENTE
     --vim.g.OmniSharp_server_path = 'C:\\Users\\gopher\\Downloads\\omnisharp-win-x64\\OmniSharp.exe'
