@@ -81,8 +81,10 @@ return {
       on_attach = on_attach,
     }
     lspconfig.anakin_language_server.setup{}
-    lspconfig.csharp_ls.setup{}
-
+    lspconfig.csharp_ls.setup{
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
   end,
 }
 
