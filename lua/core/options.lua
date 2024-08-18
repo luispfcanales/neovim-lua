@@ -2,6 +2,9 @@ vim.cmd('filetype plugin indent on')
 -- Syntax on!
 --o.statusline = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
+-- disable margen left icons
+vim.wo.signcolumn = "no"
+
 vim.g.syntax_on = true
 vim.opt.synmaxcol = 1500
 
