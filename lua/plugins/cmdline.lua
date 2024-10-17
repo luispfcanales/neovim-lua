@@ -20,6 +20,8 @@ return {
         },
       },
     })
+
+    local user_path = os.getenv("USERPROFILE") -- Obtiene el path del usuario
     vim.keymap.set(
       'n',
       '<A-z>',
@@ -29,14 +31,14 @@ return {
     vim.keymap.set(
       'n',
       '<A-w>',
-      [[<cmd>lua require('fine-cmdline').open({default_value = 'lcd C:\\Users\\gopher\\Desktop\\unamad'})<CR>]],
-      {noremap = true}
+      '<cmd>lua require("fine-cmdline").open({default_value = "lcd ' .. user_path:gsub("\\", "/") .. '/Desktop/unamad"})<CR>',
+      { noremap = true }
     )
     vim.keymap.set(
       'n',
       '<A-p>',
-      [[<cmd>lua require('fine-cmdline').open({default_value = 'lcd C:\\Users\\gopher\\Documents\\GitHub\\UNAMAD_AKDEMIC'})<CR>]],
-      {noremap = true}
+      '<cmd>lua require("fine-cmdline").open({default_value = "lcd ' .. user_path:gsub("\\", "/") .. '/Documents/GitHub/UNAMAD_AKDEMIC"})<CR>',
+      { noremap = true }
     )
   end,
 }
