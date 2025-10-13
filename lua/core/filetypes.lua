@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType",{
-  pattern = {"scss","js"},
+  pattern = {"scss","js","go"},
   callback = function()
     vim.schedule(function()
       vim.o.shiftwidth = 4

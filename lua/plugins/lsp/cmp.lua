@@ -1,26 +1,24 @@
+-- cmp.lua
 return {
   "neovim/nvim-lspconfig",
   event = {"BufReadPre","BufNewFile"},
   dependencies = {
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lsp", 
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
+    "mason-org/mason-lspconfig.nvim",
   },
   config = function()
-    local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp") -- configuration cmp-nvim-lsp
-    local cmp = require("cmp") -- configuration cmp
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local cmp = require("cmp")
     local luasnip = require("luasnip")
-
+    
+    -- Configuración de cmp
     vim.opt.completeopt = {"menu","menuone","noselect"}
-    local has_words_before = function()
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
-
+    
     cmp.setup({
       mapping = {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -39,58 +37,75 @@ return {
         { name = 'buffer' },
       },
     })
-
-    -- commands lspconfig
+    
+    -- Commands lspconfig
     local keymap = vim.keymap
-    local on_attach = function(client,buf)
+    local on_attach = function(client, buf)
       local opts = { noremap = true, silent = true, buffer = buf }
-      --keymap.set("n","<leader>gd","<Cmd>Telescope lsp_definitions<CR>",opts)
-      keymap.set("n","<leader>gd","<Cmd>lua vim.lsp.buf.definition()<CR>",opts)
-      keymap.set("n","<leader>gi","<cmd>Telescope lsp_implementations<CR>", opts)
-      --keymap.set("n", "W", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-      keymap.set("n","K",vim.lsp.buf.hover,opts)
-      keymap.set("n","W",vim.diagnostic.open_float,opts)
+      keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
+      keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
+      keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      keymap.set("n", "W", vim.diagnostic.open_float, opts)
+      
     end
-
+    
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
-    --lsp config servers
-    lspconfig.gopls.setup {
+    
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
+        }
+      }
+    })
+    
+    local lsp = vim.lsp
+    
+    -- Configurar cada servidor instalado por Mason
+    lsp.config.gopls = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+        },
+      },
+    }
+    
+    lsp.config.ts_ls = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    lspconfig.tsserver.setup {
+    
+    lsp.config.svelte = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    lspconfig.svelte.setup {
+    
+    lsp.config.html = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    lspconfig.html.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-    lspconfig.cssls.setup {
+    
+    lsp.config.cssls = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    lspconfig.anakin_language_server.setup{}
-    lspconfig.csharp_ls.setup{
-      on_attach = on_attach,
+    
+    lsp.config.omnisharp = {
       capabilities = capabilities,
+      on_attach = on_attach,
+      cmd = { "omnisharp" },
+      enable_roslyn_analyzers = true,
+      organize_imports_on_format = true,
+      enable_import_completion = true,
     }
+    
   end,
 }
-
---nvim_lsp.gopls.setup {
---  on_attach = on_attach,
---}
---require "lsp_signature".setup({
---  bind = true,
---})
