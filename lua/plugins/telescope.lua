@@ -12,9 +12,8 @@ return {
         wrap_results = true,
         prompt_prefix = " ",
         selection_caret = " ",
-        path_display = {
-          cwd = vim.fn.expand('%:p:h'),
-        },
+        --path_display = { cwd = vim.fn.expand('%:p:h') },
+        path_display = { "truncate" },
         preview = true, -- Habilita la vista previa para live_grep
         file_ignore_patterns = { 
           "node_modules",

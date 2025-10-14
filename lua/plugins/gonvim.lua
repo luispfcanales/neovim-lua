@@ -15,9 +15,9 @@ return{
       group = format_sync_grp,
     })
     --golang format
-    vim.keymap.set("n", "<leader>fs", "<cmd>gofillstruct<cr>", { desc = "fill struct" })
-    vim.keymap.set("n", "<leader>ad", "<cmd>goaddtag<cr>", { desc = "add tags" })
-    vim.keymap.set("n", "<leader>da", "<cmd>gocleartags<cr>", { desc = "clear tags" })
+    vim.keymap.set("n", "<leader>fs", "<cmd>GoFillStruct<cr>", { desc = "fill struct" })
+    vim.keymap.set("n", "<leader>ad", "<cmd>GoAddTag<cr>", { desc = "add tags" })
+    vim.keymap.set("n", "<leader>da", "<cmd>GoClearTag<cr>", { desc = "clear tags" })
     vim.keymap.set("n", "<leader>ei", "<cmd>goiferr<cr>", { desc = "ifeff completion" })
     vim.keymap.set("n", "<leader>rt", "<cmd>gotest -v<cr>", { desc = "run test" })
     vim.keymap.set("n", "<leader>gr", "<cmd>lua require'core.commands'.gorun()<cr>", { desc = "run app golang" })
