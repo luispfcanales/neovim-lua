@@ -26,10 +26,12 @@ return {
       },
     }
     require("telescope").load_extension("git_worktree")
+    require("telescope").load_extension("notify")
     local keymap = vim.keymap
     local opts = { noremap = true, silent = true, buffer = buf }
 
     keymap.set("n", "<C-p>", "<cmd>Telescope find_files<CR>",opts)
     keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<CR>",opts)
+    keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>",opts)
   end,
 }
