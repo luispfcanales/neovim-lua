@@ -10,6 +10,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "mason-org/mason-lspconfig.nvim",
+    "ray-x/lsp_signature.nvim"
   },
   config = function()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -46,7 +47,16 @@ return {
       keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
       keymap.set("n", "W", vim.diagnostic.open_float, opts)
-      
+
+      require("lsp_signature").on_attach({
+        bind = true,
+        handler_opts = {
+          border = "rounded"
+        },
+        hint_enable = false, -- Deshabilitar hints virtuales si interfieren con cmp
+        floating_window = true,
+        toggle_key = '<C-k>', -- Puedes cambiar esto
+      }, buf)
     end
     
     local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -72,6 +82,7 @@ return {
         gopls = {
           analyses = {
             unusedparams = true,
+            shadow = true,
           },
           staticcheck = true,
         },

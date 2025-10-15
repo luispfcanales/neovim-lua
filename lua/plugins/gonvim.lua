@@ -20,7 +20,7 @@ return{
     vim.keymap.set("n", "<leader>da", "<cmd>GoClearTag<cr>", { desc = "clear tags" })
     vim.keymap.set("n", "<leader>ei", "<cmd>goiferr<cr>", { desc = "ifeff completion" })
     vim.keymap.set("n", "<leader>rt", "<cmd>gotest -v<cr>", { desc = "run test" })
-    vim.keymap.set("n", "<leader>gr", "<cmd>lua require'core.commands'.gorun()<cr>", { desc = "run app golang" })
+    vim.keymap.set("n", "<leader>gr", "<cmd>lua require'core.commands'.GoRunCMD()<cr>", { desc = "run app golang" })
 
 
   end,

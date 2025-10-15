@@ -1,7 +1,7 @@
-local function GoRun()
+local function GoRunCMD()
   print(" Go command Run  ==>" )
   vim.cmd("!go run ./...")
 end
 return {
-  GoRun = GoRun
+  GoRunCMD = GoRunCMD
 }
