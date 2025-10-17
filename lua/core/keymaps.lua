@@ -70,3 +70,6 @@ mapper('n','<C-\\>','<cmd>Gvdiff<cr>')
 mapper('n','<C-a>',":vertical sball<CR>")
 
 mapper('n','dw','vb_d')
+
+--reload settings
+mapper('n', '<leader>r', ':so %<CR>')
