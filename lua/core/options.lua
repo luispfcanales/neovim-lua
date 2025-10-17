@@ -60,7 +60,7 @@ vim.opt.mouse = 'a'
 -- open with neovide
 if vim.g.neovide then
   --vim.o.guifont = "Source Code Pro:h10"
-  vim.o.guifont = "Mononoki Nerd Font:h12"
+  --vim.o.guifont = "Mononoki Nerd Font:h12"
 end
 
 -- Set zsh as shell (which zsh)
