@@ -1,7 +1,7 @@
 return {
-  "mason-org/mason-lspconfig.nvim",
+  "williamboman/mason-lspconfig.nvim",
   dependencies = {
-    { "mason-org/mason.nvim", opts = {} },
+    { "williamboman/mason.nvim", opts = {} },
     "neovim/nvim-lspconfig",
   },
   opts = {
@@ -14,7 +14,7 @@ return {
       "cssls",
       "omnisharp",
     },
-    -- Habilitar automáticamente servidores instalados con vim.lsp.enable()
-    automatic_enable = true,
+    -- Esta es la opción correcta para auto-setup
+    automatic_installation = true,
   },
 }
