@@ -65,6 +65,11 @@ if vim.g.neovide then
   vim.g.neovide_hide_mouse_when_typing = true
 end
 
+local on_windows = vim.loop.os_uname().version:match 'Windows'
+if on_windows then
+  vim.opt.shellslash = true
+end
+
 -- Set zsh as shell (which zsh)
 --o.shell = "/usr/bin/bash"
 --cmd([[ set tabline=%t\ %M ]])

@@ -6,10 +6,10 @@ return {
     "hrsh7th/cmp-nvim-lsp", 
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-nvim-lsp-signature-help", -- ✅ Agregado
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "williamboman/mason-lspconfig.nvim",
-    -- "ray-x/lsp_signature.nvim"
   },
   config = function()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -25,6 +25,13 @@ return {
         ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-Space>'] = cmp.mapping.complete(),
+        -- ✅ Opcional: mapeo para signature help manual
+        ['<C-k>'] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.close()
+          end
+          vim.lsp.buf.signature_help()
+        end, { 'i', 'c' }),
       },
       snippet = {
         expand = function(args)
@@ -33,9 +40,29 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' }, -- ✅ Agregado
         { name = 'path' },
         { name = 'luasnip' },
         { name = 'buffer' },
+      },
+      -- ✅ Opcional: Configurar ventana de documentación
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      -- ✅ Opcional: Formatear la presentación
+      formatting = {
+        format = function(entry, vim_item)
+          -- Mostrar de dónde viene la sugerencia
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            nvim_lsp_signature_help = "[Sig]",
+            luasnip = "[Snip]",
+            buffer = "[Buf]",
+            path = "[Path]",
+          })[entry.source.name]
+          return vim_item
+        end,
       },
     })
     
@@ -48,15 +75,8 @@ return {
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
       keymap.set("n", "W", vim.diagnostic.open_float, opts)
       
-      --[[ require("lsp_signature").on_attach({
-        bind = true,
-        handler_opts = {
-          border = "rounded"
-        },
-        hint_enable = false,
-        floating_window = true,
-        toggle_key = '<C-k>',
-      }, bufnr) ]]
+      -- ✅ Mapeo adicional para signature help manual (opcional)
+      keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
     end
     
     local capabilities = cmp_nvim_lsp.default_capabilities()
