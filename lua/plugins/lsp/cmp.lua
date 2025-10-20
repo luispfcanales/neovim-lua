@@ -9,7 +9,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "williamboman/mason-lspconfig.nvim",
-    "ray-x/lsp_signature.nvim"
+    -- "ray-x/lsp_signature.nvim"
   },
   config = function()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -48,7 +48,7 @@ return {
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
       keymap.set("n", "W", vim.diagnostic.open_float, opts)
       
-      require("lsp_signature").on_attach({
+      --[[ require("lsp_signature").on_attach({
         bind = true,
         handler_opts = {
           border = "rounded"
@@ -56,7 +56,7 @@ return {
         hint_enable = false,
         floating_window = true,
         toggle_key = '<C-k>',
-      }, bufnr)
+      }, bufnr) ]]
     end
     
     local capabilities = cmp_nvim_lsp.default_capabilities()
