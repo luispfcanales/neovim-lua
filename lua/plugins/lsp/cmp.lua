@@ -3,10 +3,10 @@ return {
   event = {"BufReadPre","BufNewFile"},
   dependencies = {
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp", 
+    "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    "hrsh7th/cmp-nvim-lsp-signature-help", -- ✅ Agregado
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "williamboman/mason-lspconfig.nvim",
@@ -25,7 +25,6 @@ return {
         ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-Space>'] = cmp.mapping.complete(),
-        -- ✅ Opcional: mapeo para signature help manual
         ['<C-k>'] = cmp.mapping(function()
           if cmp.visible() then
             cmp.close()
@@ -40,20 +39,19 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' }, -- ✅ Agregado
+        { name = 'nvim_lsp_signature_help' },
         { name = 'path' },
         { name = 'luasnip' },
         { name = 'buffer' },
       },
-      -- ✅ Opcional: Configurar ventana de documentación
+
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      -- ✅ Opcional: Formatear la presentación
+
       formatting = {
         format = function(entry, vim_item)
-          -- Mostrar de dónde viene la sugerencia
           vim_item.menu = ({
             nvim_lsp = "[LSP]",
             nvim_lsp_signature_help = "[Sig]",
@@ -74,8 +72,6 @@ return {
       keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
       keymap.set("n", "W", vim.diagnostic.open_float, opts)
-      
-      -- ✅ Mapeo adicional para signature help manual (opcional)
       keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
     end
     
@@ -93,6 +89,8 @@ return {
     })
     
     -- Configurar cada servidor usando vim.lsp.config (API nueva de Neovim 0.11)
+    
+    -- Go
     vim.lsp.config.gopls = {
       cmd = { "gopls" },
       filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -142,23 +140,20 @@ return {
       on_attach = on_attach,
     }
     
-    vim.lsp.config.omnisharp = {
-      cmd = { "omnisharp" },
+    vim.lsp.config.csharp_ls = {
       filetypes = { "cs", "vb" },
-      root_markers = { "*.csproj", "*.sln", ".git" },
+      root_markers = { "*.sln", "*.csproj", "global.json", ".git" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
-        omnisharp = {
-          enable_roslyn_analyzers = true,
-          organize_imports_on_format = true,
-          enable_import_completion = true,
-        },
+          ["csharp-ls"] = {
+              enable_roslyn_analysers = true,
+              disable_format = false,
+          },
       },
     }
     
-    -- Habilitar todos los servidores configurados
-    vim.lsp.enable({"gopls", "ts_ls", "svelte", "html", "cssls", "omnisharp"})
-    
+    -- Habilitar todos los servidores configurados, incluyendo el nuevo.
+    vim.lsp.enable({"gopls", "ts_ls", "svelte", "html", "cssls", "csharp_ls" })
   end,
 }

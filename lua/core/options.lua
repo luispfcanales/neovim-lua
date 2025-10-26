@@ -40,7 +40,6 @@ vim.opt.expandtab = true
 
 -- I have a special configuration for each file in ftplugin/
 vim.opt.softtabstop = 2
-vim.opt.softtabstop = 2
 
 -- Autoident
 vim.opt.autoindent = true

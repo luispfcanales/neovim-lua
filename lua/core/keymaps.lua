@@ -1,75 +1,119 @@
+-- Obtener información del sistema operativo
 local on_windows = vim.loop.os_uname().version:match 'Windows'
 
-local mapper = function(mode, key, result)
-  vim.api.nvim_set_keymap(mode, key, result, { noremap = true, silent = true, expr = false })
-end
+-- pero es buena práctica declararlo explícitamente para claridad.
+local default_opts = { noremap = true, silent = true }
 
 -- Define Mapleader
 vim.g.mapleader = ','
 
-local init,options,keymaps = 'init.lua','lua/core/options.lua','lua/core/keymaps.lua'
+-- Rutas de configuración
+local init, options, keymaps = 'init.lua', 'lua/core/options.lua', 'lua/core/keymaps.lua'
 local routeConfigNvim = ':e ~/.config/nvim/'
+-- Si routeSnipConfig no se usa en un keymap aquí, se puede omitir o dejar sin usar
 
-local routeSnipConfig = '~/.config/nvim/snippets'
 if on_windows then
   routeConfigNvim = ':e ~/AppData/Local/nvim/'
-  routeSnipConfig = '~/AppData/Local/nvim/snippets'
 end
-mapper('n', '<leader>fo', routeConfigNvim .. options .. '<CR>')
-mapper('n', '<leader>fk', routeConfigNvim .. keymaps .. '<CR>')
-mapper('n', '<leader>fi', routeConfigNvim .. init .. '<CR>')
 
-mapper('i', '<A-i>', '<ESC>')
-mapper('v', '<A-i>', '<ESC>')
+-- Función auxiliar para simplificar la sintaxis de vim.keymap.set (Opcional, pero útil)
+local map = vim.keymap.set
 
--- Exit and save
-mapper('n', '<leader>w', ':w<CR>')
-mapper('n', '<leader>ef', ':q!<CR>')
+---
+--- 1. Asignaciones para abrir la configuración
+---
+map('n', '<leader>fo', routeConfigNvim .. options .. '<CR>', default_opts)
+map('n', '<leader>fk', routeConfigNvim .. keymaps .. '<CR>', default_opts)
+map('n', '<leader>fi', routeConfigNvim .. init .. '<CR>', default_opts)
 
--- use ESC to turn off search highlighting
-mapper('n', '<Esc>', ':noh<CR>')
+---
+--- 2. Navegación, Comandos Básicos y Movimiento
+---
 
--- moved in tabs buffers
-mapper('n','<TAB>',':bn<CR>')
-mapper('n','<S-TAB>',':bp<CR>')
-mapper('n','<A-x>',':bd!<CR>')
-mapper('t', '<A-i>', '<C-\\><C-n>')
---mapper('t', '<leader>x', '<C-\\><C-n>:bd!<CR><CR>')
+-- Moverse entre buffers (pestañas)
+map('n', '<TAB>', ':bn<CR>', default_opts)
+map('n', '<S-TAB>', ':bp<CR>', default_opts)
+map('n', '<A-x>', ':bd!<CR>', default_opts)
 
--- moved splits
---mapper('n','<A-j>','<C-w>j')
---mapper('n','<A-k>','<C-w>k')
-mapper('n','<A-l>','<C-w>l')
-mapper('n','<A-h>','<C-w>h')
+-- Salir y guardar
+map('n', '<leader>w', ':w<CR>', default_opts)
+map('n', '<leader>ef', ':q!<CR>', default_opts)
 
---faster scrolling
-mapper('n','<C-j>','10<C-e>')
-mapper('n','<C-k>','10<C-y>')
---copy 
-mapper('n','<leader>c','vi(y')
---delete inner of ""
-mapper('n','<leader>ds','di"i')
+-- Desactivar el resaltado de búsqueda (search highlighting)
+map('n', '<Esc>', ':noh<CR>', default_opts)
 
---indent lines
-mapper('v','<','<gv')
-mapper('v','>','>gv')
-mapper('n','>','>>')
-mapper('n','<','<<')
-mapper('n','<A-j>',':m .+1<CR>==')
-mapper('n','<A-k>',':m .-2<CR>==')
+-- Movimiento de splits (ventanas)
+map('n', '<A-l>', '<C-w>l', default_opts)
+map('n', '<A-h>', '<C-w>h', default_opts)
 
-mapper('n','G','Gzz')
+-- Movimiento rápido de líneas (necesitan la bandera {expr = false} para <CR>)
+map('n', '<A-j>', ':m .+1<CR>==', default_opts)
+map('n', '<A-k>', ':m .-2<CR>==', default_opts)
 
-mapper('n','<A-s>','<cmd>Lspsaga rename<cr>')
---gitsigns keys
-mapper('n','<leader><space>','<cmd>Gitsigns preview_hunk<cr>')
-mapper('n','<C-\\>','<cmd>Gvdiff<cr>')
---mapper('n','<leader>ac',[[<cmd>Gwrite<CR>:Git commit<CR>]])
+-- scrolling más rápido
+map('n', '<C-j>', '10<C-e>', default_opts)
+map('n', '<C-k>', '10<C-y>', default_opts)
 
---
-mapper('n','<C-a>',":vertical sball<CR>")
+-- G seguido de G, pero en el centro de la pantalla
+map('n', 'G', 'Gzz', default_opts)
 
-mapper('n','dw','vb_d')
+-- Ventana de archivos/buffers: abrir todos los buffers en splits verticales
+-- La función para alternar entre splits verticales de todos los buffers
+local function toggle_sball()
+  local win_count = #vim.api.nvim_list_wins()
+    if win_count > 1 then
+      vim.cmd('only')
+    else
+      vim.cmd('vertical sball')
+    end
+end
 
---reload settings
-mapper('n', '<leader>r', ':so %<CR>')
+-- Asignación de tecla actualizada
+vim.keymap.set('n', '<C-a>', toggle_sball, default_opts)
+
+---
+--- 3. Modos y Edición
+---
+
+-- Salir de modos visual/insertar con Alt-i
+map({ 'i', 'v' }, '<A-i>', '<ESC>', default_opts)
+-- Salir de la terminal (terminal mode) con Alt-i
+map('t', '<A-i>', '<C-\\><C-n>', default_opts)
+
+-- Indentación en modo visual
+map('v', '<', '<gv', default_opts)
+map('v', '>', '>gv', default_opts)
+-- Indentación en modo normal
+map('n', '>', '>>', default_opts)
+map('n', '<', '<<', default_opts)
+
+-- Copiar el contenido interno de ()
+map('n', '<leader>c', 'vi(y', default_opts)
+
+-- Borrar el contenido interno de ""
+map('n', '<leader>ds', 'di"i', default_opts)
+
+-- Borrar palabra con cursor en el final (similar a 'db'
+map('n', 'dw', 'vb_d', default_opts)
+
+-- Recargar configuración
+map('n', '<leader>r', ':so %<CR>', default_opts)
+
+---
+--- 4. Asignaciones con Funciones de Lua (Plugins/API)
+---
+
+-- Copiar todo el contenido del buffer (El que causó el problema original)
+map('n', '<leader>ac', function()
+  vim.api.nvim_command('normal! ggVGy')
+  vim.notify('✅ Todo el contenido copiado al portapapeles', vim.log.levels.INFO, { title = 'Keymap' })
+end, default_opts)
+
+-- LspSaga Rename
+map('n', '<A-s>', '<cmd>Lspsaga rename<cr>', default_opts)
+
+-- Gitsigns: previsualizar hunk
+map('n', '<leader><space>', '<cmd>Gitsigns preview_hunk<cr>', default_opts)
+
+-- Gitsigns: diff con Gvdiff
+map('n', '<C-\\>', '<cmd>Gvdiff<cr>', default_opts)
