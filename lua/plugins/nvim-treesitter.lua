@@ -13,6 +13,7 @@ return {
         return
       end
       
+      -- SETUP PRIMERO del contexto de comentarios
       require('ts_context_commentstring').setup {
         enable_autocmd = false,
       }
@@ -21,39 +22,54 @@ return {
         ensure_installed = { 
           "go","svelte","javascript","typescript", "tsx","css",
           "json","lua","html","proto","markdown","vim",
-          "dart","python","c_sharp",
+          "dart","python",
         },
+        
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
+          disable = {"c_sharp"},
         },
+        
         autotag = {
           enable = true,
           filetypes = {
             "html",
-            "svelte",
+            "svelte", 
             "javascript",
             "javascriptreact",
             "typescript",
             "typescriptreact"
           },
         },
+        
         rainbow = {
           enable = true,
           extended_mode = false,
-          max_file_lines = nil,
-          disable = {"go","html"},
+          max_file_lines = 1000, -- LÍMITE para archivos grandes
+          disable = {"go","html", "c_sharp"}, -- Deshabilitar para C#
         },
-        autopairs = {
-          enable = true
-        },
+        
+        -- AUTOINSTALACIÓN DESHABILITADA para mejor rendimiento
+        auto_install = false,
+        
         indent = {
           enable = true,
+          disable = {"c_sharp", "python"}, -- C# tiene indentación problemática
         },
-        auto_install = true,
+        
+        -- NUEVA CONFIGURACIÓN DE RENDIMIENTO
+        incremental_selection = {
+          enable = false, -- Deshabilitar en proyectos grandes
+        },
+        
+        textobjects = {
+          enable = false, -- Deshabilitar en proyectos grandes
+        }
       })
       
-      vim.g.skip_ts_context_commentstring_module = true
+      -- ELIMINAR esta línea problemática
+      -- vim.g.skip_ts_context_commentstring_module = true
     end,
   }
 }

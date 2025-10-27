@@ -4,6 +4,18 @@ vim.cmd('filetype plugin indent on')
 
 -- disable margen left icons
 --vim.wo.signcolumn = "no"
+-- Nice Time
+-- better performance with C#
+vim.opt.redrawtime = 5000
+vim.opt.updatetime = 500
+vim.opt.timeoutlen = 500
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cs",
+  callback = function()
+    vim.opt_local.foldmethod = "manual"
+    vim.opt_local.synmaxcol = 500
+  end,
+})
 
 vim.g.syntax_on = true
 vim.opt.synmaxcol = 1500
@@ -24,8 +36,6 @@ vim.opt.number = true
 -- Relative Numbers!
 vim.opt.relativenumber = true
 
--- Nice Time
---o.updatetime = 250 --testing now
 
 -- When line is longer than the screen, it continues on the next line
 vim.opt.wrap = false --disable line wrapping

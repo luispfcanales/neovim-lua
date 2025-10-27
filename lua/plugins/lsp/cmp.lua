@@ -154,6 +154,13 @@ return {
     }
     
     -- Habilitar todos los servidores configurados, incluyendo el nuevo.
-    vim.lsp.enable({"gopls", "ts_ls", "svelte", "html", "cssls", "csharp_ls" })
+    vim.lsp.enable({
+      "gopls",
+      "ts_ls",
+      "svelte",
+      "html",
+      "cssls",
+      "csharp_ls",
+    })
   end,
 }

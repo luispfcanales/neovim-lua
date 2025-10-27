@@ -12,7 +12,6 @@ return {
       "svelte",
       "html",
       "cssls",
-      "omnisharp",
     },
     -- Esta es la opción correcta para auto-setup
     automatic_installation = true,
