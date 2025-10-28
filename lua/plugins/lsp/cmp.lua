@@ -64,6 +64,54 @@ return {
       },
     })
     
+    -- Sobrescribir el handler de mensajes del LSP
+    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+      opts = opts or {}
+      opts.border = opts.border or "rounded"
+      return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    end
+    
+    -- Interceptar mensajes de window/showMessage y enviarlos a nvim-notify
+    vim.lsp.handlers["window/showMessage"] = function(err, result, ctx, config)
+      if result and result.message then
+        local client = vim.lsp.get_client_by_id(ctx.client_id)
+        local client_name = client and client.name or "LSP"
+        
+        local level = ({
+          [1] = vim.log.levels.ERROR,
+          [2] = vim.log.levels.WARN,
+          [3] = vim.log.levels.INFO,
+          [4] = vim.log.levels.DEBUG,
+        })[result.type] or vim.log.levels.INFO
+        
+        vim.notify(result.message, level, {
+          title = client_name,
+          timeout = 2000,
+        })
+      end
+    end
+    
+    -- Interceptar mensajes de window/logMessage y enviarlos a nvim-notify
+    vim.lsp.handlers["window/logMessage"] = function(err, result, ctx, config)
+      if result and result.message then
+        local client = vim.lsp.get_client_by_id(ctx.client_id)
+        local client_name = client and client.name or "LSP"
+        
+        local level = ({
+          [1] = vim.log.levels.ERROR,
+          [2] = vim.log.levels.WARN,
+          [3] = vim.log.levels.INFO,
+          [4] = vim.log.levels.DEBUG,
+        })[result.type] or vim.log.levels.INFO
+        
+        vim.notify(result.message, level, {
+          title = client_name,
+          timeout = 1500,
+        })
+      end
+    end
+    
     -- Commands lspconfig
     local keymap = vim.keymap
     local on_attach = function(client, bufnr)
@@ -153,7 +201,7 @@ return {
       },
     }
     
-    -- Habilitar todos los servidores configurados, incluyendo el nuevo.
+    -- Habilitar todos los servidores configurados
     vim.lsp.enable({
       "gopls",
       "ts_ls",
