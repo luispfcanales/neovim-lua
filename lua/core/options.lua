@@ -68,7 +68,7 @@ vim.opt.mouse = 'a'
 
 -- open with neovide
 if vim.g.neovide then
-  vim.o.guifont = "Cascadia Code:h13"
+  vim.o.guifont = "Cascadia Code:h12"
   vim.g.neovide_opacity = 0.90
   vim.g.neovide_scroll_animation_length = 0.3
   vim.g.neovide_hide_mouse_when_typing = true

@@ -5,7 +5,37 @@ return {
     "nvim-lua/plenary.nvim",
   },
   config = function()
-    local themes = require "telescope.themes"
+    -- Detectar qué comando de búsqueda está disponible
+    local function get_find_command()
+      if vim.fn.executable('fd') == 1 then
+        return 'fd'
+      elseif vim.fn.executable('fdfind') == 1 then
+        return 'fdfind'
+      else
+        vim.notify("No se encontró fd ni fdfind, usando find como fallback", vim.log.levels.WARN)
+        return 'find'
+      end
+    end
+
+    local find_cmd = get_find_command()
+    
+    -- Configuración común para comandos de búsqueda
+    local find_command_args = {
+      find_cmd,
+      "--type", "f", 
+      "--hidden",
+      "--exclude", ".git",
+      "--exclude", "bin",
+      "--exclude", "obj",
+      "--exclude", "packages",
+      "--exclude", "node_modules",
+      "--exclude", ".vs",
+    }
+
+    -- Si estamos usando find en lugar de fd, ajustar los argumentos
+    if find_cmd == 'find' then
+      find_command_args = { "find", ".", "-type", "f" }
+    end
 
     require('telescope').setup {
       defaults = {
@@ -57,18 +87,7 @@ return {
       
       pickers = {
         find_files = {
-          -- USAR FD en Windows (CORREGIDO)
-          find_command = vim.fn.has('win32') == 1 and {
-            "fd", 
-            "--type", "f", 
-            "--hidden",
-            "--exclude", ".git",
-            "--exclude", "bin",
-            "--exclude", "obj",
-            "--exclude", "packages",
-            "--exclude", "node_modules",
-            "--exclude", ".vs",
-          } or { "find", ".", "-type", "f" },
+          find_command = find_command_args,
           limit = 100,
         },
         
@@ -104,19 +123,10 @@ return {
     local keymap = vim.keymap
     local opts = { noremap = true, silent = true }
 
-    -- KEYMAPS OPTIMIZADOS CON FD
+    -- KEYMAPS OPTIMIZADOS CON DETECCIÓN AUTOMÁTICA
     keymap.set("n", "<C-p>", function()
       require("telescope.builtin").find_files({
-        find_command = {
-          "fd",
-          "--type", "f",
-          "--hidden", 
-          "--exclude", ".git",
-          "--exclude", "bin",
-          "--exclude", "obj",
-          "--exclude", "packages",
-          "--exclude", "node_modules",
-        },
+        find_command = find_command_args,
         limit = 50,
       })
     end, opts)
@@ -134,12 +144,13 @@ return {
     -- Búsqueda solo en C#
     keymap.set("n", "<leader>fc", function()
       require("telescope.builtin").live_grep({
-        search_dirs = { "." },  -- Asegurar que busca en directorio actual
+        search_dirs = { "." },
         type_filter = "cs",
         additional_args = function() 
           return { "--type=cs", "--max-depth=6" } 
         end
       })
     end, { desc = "Grep C# files only" })
+
   end,
 }

@@ -21,6 +21,7 @@ return {
       },
     })
 
+    -- echo $env:USERPROFILE
     local user_path = os.getenv("USERPROFILE") -- Obtiene el path del usuario
     vim.keymap.set(
       'n',
