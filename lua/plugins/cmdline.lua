@@ -22,14 +22,14 @@ return {
     })
 
     -- echo $env:USERPROFILE
-    local user_path = os.getenv("USERPROFILE") -- Obtiene el path del usuario
+    -- local user_path = os.getenv("USERPROFILE") -- Obtiene el path del usuario
     vim.keymap.set(
       'n',
       '<A-z>',
       "<cmd>lua require('fine-cmdline').open({default_value = 'GoImpl '})<CR>",
       {noremap = true}
     )
-    vim.keymap.set(
+    --[[ vim.keymap.set(
       'n',
       '<A-w>',
       '<cmd>lua require("fine-cmdline").open({default_value = "lcd ' .. user_path:gsub("\\", "/") .. '/Desktop/unamad"})<CR>',
@@ -40,6 +40,6 @@ return {
       '<A-p>',
       '<cmd>lua require("fine-cmdline").open({default_value = "lcd ' .. user_path:gsub("\\", "/") .. '/Documents/GitHub/UNAMAD_AKDEMIC"})<CR>',
       { noremap = true }
-    )
+    ) ]]
   end,
 }
