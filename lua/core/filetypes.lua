@@ -1,11 +1,20 @@
--- Autocomando para sobrescribir a 4 espacios solo en estos tipos de archivo.
-vim.api.nvim_create_autocmd("FileType",{
-  pattern = {"scss","js","go","cs"},
+-- Configuración de indentación que funciona en ambos sistemas
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"scss","js","cs"},
   callback = function()
     vim.bo.shiftwidth = 4
     vim.bo.softtabstop = 4
     vim.bo.tabstop = 4
-    
-    vim.bo.expandtab = false 
+    vim.bo.expandtab = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"go"},
+  callback = function()
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.tabstop = 4
+    vim.bo.expandtab = false
   end,
 })

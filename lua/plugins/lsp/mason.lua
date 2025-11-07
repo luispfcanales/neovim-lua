@@ -12,6 +12,7 @@ return {
       "svelte",
       "html",
       "cssls",
+      "lua_ls",
     },
     -- Esta es la opción correcta para auto-setup
     automatic_installation = true,
