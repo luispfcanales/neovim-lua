@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = {"BufReadPre","BufNewFile"},
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
@@ -15,10 +15,10 @@ return {
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    
+
     -- Configuración de cmp
-    vim.opt.completeopt = {"menu","menuone","noselect"}
-    
+    vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
     cmp.setup({
       mapping = {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -63,7 +63,7 @@ return {
         end,
       },
     })
-    
+
     -- Sobrescribir el handler de mensajes del LSP
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -71,47 +71,47 @@ return {
       opts.border = opts.border or "rounded"
       return orig_util_open_floating_preview(contents, syntax, opts, ...)
     end
-    
+
     -- Interceptar mensajes de window/showMessage y enviarlos a nvim-notify
     vim.lsp.handlers["window/showMessage"] = function(err, result, ctx, config)
       if result and result.message then
         local client = vim.lsp.get_client_by_id(ctx.client_id)
         local client_name = client and client.name or "LSP"
-        
+
         local level = ({
           [1] = vim.log.levels.ERROR,
           [2] = vim.log.levels.WARN,
           [3] = vim.log.levels.INFO,
           [4] = vim.log.levels.DEBUG,
         })[result.type] or vim.log.levels.INFO
-        
+
         vim.notify(result.message, level, {
           title = client_name,
           timeout = 2000,
         })
       end
     end
-    
+
     -- Interceptar mensajes de window/logMessage y enviarlos a nvim-notify
     vim.lsp.handlers["window/logMessage"] = function(err, result, ctx, config)
       if result and result.message then
         local client = vim.lsp.get_client_by_id(ctx.client_id)
         local client_name = client and client.name or "LSP"
-        
+
         local level = ({
           [1] = vim.log.levels.ERROR,
           [2] = vim.log.levels.WARN,
           [3] = vim.log.levels.INFO,
           [4] = vim.log.levels.DEBUG,
         })[result.type] or vim.log.levels.INFO
-        
+
         vim.notify(result.message, level, {
           title = client_name,
           timeout = 1500,
         })
       end
     end
-    
+
     -- Commands lspconfig
     local keymap = vim.keymap
     local on_attach = function(client, bufnr)
@@ -122,9 +122,9 @@ return {
       keymap.set("n", "W", vim.diagnostic.open_float, opts)
       keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
     end
-    
+
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    
+
     vim.diagnostic.config({
       signs = {
         text = {
@@ -135,9 +135,9 @@ return {
         }
       }
     })
-    
+
     -- Configurar cada servidor usando vim.lsp.config (API nueva de Neovim 0.11)
-    
+
     -- Go
     vim.lsp.config.gopls = {
       cmd = { "gopls" },
@@ -155,7 +155,7 @@ return {
         },
       },
     }
-    
+
     vim.lsp.config.ts_ls = {
       cmd = { "typescript-language-server", "--stdio" },
       filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
@@ -163,7 +163,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    
+
     vim.lsp.config.svelte = {
       cmd = { "svelteserver", "--stdio" },
       filetypes = { "svelte" },
@@ -171,7 +171,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    
+
     vim.lsp.config.html = {
       cmd = { "vscode-html-language-server", "--stdio" },
       filetypes = { "html" },
@@ -179,7 +179,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    
+
     vim.lsp.config.cssls = {
       cmd = { "vscode-css-language-server", "--stdio" },
       filetypes = { "css", "scss", "less" },
@@ -187,28 +187,28 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
-    
+
     vim.lsp.config.csharp_ls = {
       filetypes = { "cs", "vb" },
       root_markers = { "*.sln", "*.csproj", "global.json", ".git" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
-          ["csharp-ls"] = {
-              enable_roslyn_analysers = true,
-              disable_format = false,
-          },
+        ["csharp-ls"] = {
+          enable_roslyn_analysers = true,
+          disable_format = false,
+        },
       },
     }
-    
+
     -- Habilitar todos los servidores configurados
-    vim.lsp.enable({
+    --[[ vim.lsp.enable({
       "gopls",
       "ts_ls",
       "svelte",
       "html",
       "cssls",
       "csharp_ls",
-    })
+    }) ]]
   end,
 }

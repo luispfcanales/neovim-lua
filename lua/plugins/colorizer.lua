@@ -1,17 +1,17 @@
-return{
+return {
   "Akianonymus/nvim-colorizer.lua",
-  event = {"BufReadPre","BufNewFile"},
+  event = { "BufReadPre", "BufNewFile" },
   --config = true,
   config = function()
-    local status_ok,color = pcall(require,"colorizer")
+    local status_ok, color = pcall(require, "colorizer")
     if not status_ok then
       return
     end
-    color.setup{
-      filetypes = { 
+    color.setup {
+      filetypes = {
         'javascript',
         'css',
-        svelte = { mode = 'virtualtext'; }
+        svelte = { mode = 'virtualtext', }
       },
       user_default_options = {
         RGB = true,
