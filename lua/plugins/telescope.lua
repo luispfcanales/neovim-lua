@@ -18,11 +18,11 @@ return {
     end
 
     local find_cmd = get_find_command()
-    
+
     -- Configuración común para comandos de búsqueda
     local find_command_args = {
       find_cmd,
-      "--type", "f", 
+      "--type", "f",
       "--hidden",
       "--exclude", ".git",
       "--exclude", "bin",
@@ -44,9 +44,9 @@ return {
         selection_caret = " ",
         path_display = { "truncate" },
         preview = true,
-        
+
         -- IGNORAR MASIVAMENTE para .NET
-        file_ignore_patterns = { 
+        file_ignore_patterns = {
           "node_modules",
           ".git",
           ".cache",
@@ -63,19 +63,19 @@ return {
           "%.suo$",
           "bundle",
         },
-        
+
         -- CONFIGURACIONES DE RENDIMIENTO
         cache_picker = {
           num_pickers = 10,
           limit_entries = 1000
         },
-        
+
         layout_config = {
           width = 0.95,
           height = 0.85,
           preview_cutoff = 1,
         },
-        
+
         mappings = {
           i = {
             ["<C-j>"] = require("telescope.actions").move_selection_next,
@@ -84,73 +84,80 @@ return {
           },
         },
       },
-      
+
       pickers = {
         find_files = {
           find_command = find_command_args,
           limit = 100,
         },
-        
+
         live_grep = {
           -- LIMITAR grep para proyectos grandes
           additional_args = function(opts)
-            return { 
+            return {
               "--max-depth=8",
               "--type=cs",
               "--type=json",
-              "--type=xml", 
+              "--type=xml",
               "--type=lua",
             }
           end,
-          
+
           disable_coordinates = true,
           only_sort_text = true,
         },
-        
+
         git_status = {
           git_icons = {
             added = "A",
-            modified = "M", 
+            modified = "M",
             deleted = "D",
           }
         }
       }
     }
-    
+
     require("telescope").load_extension("git_worktree")
     require("telescope").load_extension("notify")
-    
+    local build_t = require("telescope.builtin")
+
     local keymap = vim.keymap
     local opts = { noremap = true, silent = true }
 
     -- KEYMAPS OPTIMIZADOS CON DETECCIÓN AUTOMÁTICA
     keymap.set("n", "<C-p>", function()
-      require("telescope.builtin").find_files({
+      build_t.find_files({
         find_command = find_command_args,
         limit = 50,
       })
     end, opts)
-    
+
     keymap.set("n", "<C-g>", function()
-      require("telescope.builtin").live_grep({
-        additional_args = function() 
-          return { "--max-depth=6" } 
+      build_t.live_grep({
+        additional_args = function()
+          return { "--max-depth=6" }
         end
       })
     end, opts)
-    
+
     keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>", opts)
-    
+
     -- Búsqueda solo en C#
     keymap.set("n", "<leader>fc", function()
-      require("telescope.builtin").live_grep({
+      build_t.live_grep({
         search_dirs = { "." },
         type_filter = "cs",
-        additional_args = function() 
-          return { "--type=cs", "--max-depth=6" } 
+        additional_args = function()
+          return { "--type=cs", "--max-depth=6" }
         end
       })
     end, { desc = "Grep C# files only" })
 
+    keymap.set(
+      'n',
+      '<leader>gc',
+      build_t.git_bcommits,
+      { desc = '[G]it [C]ommits for current buffer' }
+    )
   end,
 }
