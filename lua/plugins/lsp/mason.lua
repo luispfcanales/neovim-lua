@@ -13,6 +13,7 @@ return {
       "html",
       "cssls",
       "lua_ls",
+      "csharp_ls",
     },
     -- Esta es la opción correcta para auto-setup
     automatic_installation = true,
