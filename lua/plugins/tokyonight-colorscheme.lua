@@ -1,9 +1,9 @@
 return {
   "folke/tokyonight.nvim",
-  priority = 1001,  -- Mayor prioridad
+  priority = 1001, -- Mayor prioridad
   config = function()
     require("tokyonight").setup({
-      style = "night",
+      style = "storm",
       transparent = false,
       terminal_colors = true,
       styles = {
