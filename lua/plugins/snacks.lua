@@ -29,7 +29,7 @@ return {
     { "<a-p>",      function() Snacks.picker.smart() end,               desc = "Smart Find Files" },
     -- { "<leader>,",       function() Snacks.picker.buffers() end,         desc = "Buffers" },
     { "<c-g>",      function() Snacks.picker.grep() end,                desc = "Grep" },
-    { "<a-h>",      function() Snacks.picker.command_history() end,     desc = "Command History" },
+    { "<a-/>",      function() Snacks.picker.command_history() end,     desc = "Command History" },
     { "<leader>n",  function() Snacks.picker.notifications() end,       desc = "Notification History" },
     { "<a-e>",      function() Snacks.explorer() end,                   desc = "File Explorer" },
     -- find

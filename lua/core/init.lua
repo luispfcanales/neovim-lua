@@ -1,4 +1,3 @@
-require("core.keymaps")
-require("core.options")
-require("core.commands")
-require("core.filetypes")
+require("lua.core.keymaps")
+require("lua.core.options")
+require("lua.core.autocommands")
