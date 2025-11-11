@@ -3,11 +3,11 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    --[[ bigfile = { enabled = true },
-    dashboard = { enabled = true },
-    explorer = { enabled = true },
+    -- bigfile = { enabled = true },
+    -- dashboard = { enabled = true },
+    -- explorer = { enabled = true },
     indent = { enabled = true },
-    input = { enabled = true }, ]]
+    input = { enabled = true },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -26,20 +26,24 @@ return {
   },
   keys = {
     -- Top Pickers & Explorer
-    { "<a-p>",      function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
+    { "<a-p>",      function() Snacks.picker.smart() end,               desc = "Smart Find Files" },
     -- { "<leader>,",       function() Snacks.picker.buffers() end,         desc = "Buffers" },
-    { "<leader>/",  function() Snacks.picker.grep() end,            desc = "Grep" },
-    { "<leader>:",  function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n",  function() Snacks.picker.notifications() end,   desc = "Notification History" },
-    { "<a-e>",      function() Snacks.explorer() end,               desc = "File Explorer" },
+    { "<c-g>",      function() Snacks.picker.grep() end,                desc = "Grep" },
+    { "<leader>:",  function() Snacks.picker.command_history() end,     desc = "Command History" },
+    { "<leader>n",  function() Snacks.picker.notifications() end,       desc = "Notification History" },
+    { "<a-e>",      function() Snacks.explorer() end,                   desc = "File Explorer" },
     -- find
-    { "<leader>ff", function() Snacks.picker.files() end,           desc = "Find Files" },
+    { "<c-p>",      function() Snacks.picker.files() end,               desc = "Find Files" },
     -- git
-    { "<leader>x",  function() Snacks.picker.git_diff() end,        desc = "Git Diff (Hunks)" },
+    { "<leader>x",  function() Snacks.picker.git_diff() end,            desc = "Git Diff (Hunks)" },
     --searhc
-    { "<leader>sm", function() Snacks.picker.marks() end,           desc = "Marks" },
+    { "<leader>sm", function() Snacks.picker.marks() end,               desc = "Marks" },
+    -- LSP
+    { "gd",         function() Snacks.picker.lsp_definitions() end,     desc = "Goto Definition" },
+    { "gi",         function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     -- Other
-    { "<a-w>",      function() Snacks.lazygit() end,                desc = "Lazygit" },
+    { "<a-w>",      function() Snacks.lazygit() end,                    desc = "Lazygit" },
+    { "<a-x>",      function() Snacks.bufdelete() end,                  desc = "Delete Buffer" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {

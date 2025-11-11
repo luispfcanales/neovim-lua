@@ -33,7 +33,7 @@ map('n', '<leader>fi', routeConfigNvim .. init .. '<CR>', default_opts)
 -- Moverse entre buffers (pestañas)
 map('n', '<TAB>', ':bn<CR>', default_opts)
 map('n', '<S-TAB>', ':bp<CR>', default_opts)
-map('n', '<A-x>', ':bd!<CR>', default_opts)
+-- map('n', '<A-x>', ':bd!<CR>', default_opts)
 
 -- Salir y guardar
 map('n', '<leader>w', ':w<CR>', default_opts)
@@ -61,11 +61,11 @@ map('n', 'G', 'Gzz', default_opts)
 -- La función para alternar entre splits verticales de todos los buffers
 local function toggle_sball()
   local win_count = #vim.api.nvim_list_wins()
-    if win_count > 1 then
-      vim.cmd('only')
-    else
-      vim.cmd('vertical sball')
-    end
+  if win_count > 1 then
+    vim.cmd('only')
+  else
+    vim.cmd('vertical sball')
+  end
 end
 
 -- Asignación de tecla actualizada

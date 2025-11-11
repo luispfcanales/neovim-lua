@@ -125,20 +125,20 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- KEYMAPS OPTIMIZADOS CON DETECCIÓN AUTOMÁTICA
-    keymap.set("n", "<C-p>", function()
+    --[[ keymap.set("n", "<C-p>", function()
       build_t.find_files({
         find_command = find_command_args,
         limit = 50,
       })
-    end, opts)
+    end, opts) ]]
 
-    keymap.set("n", "<C-g>", function()
+    --[[ keymap.set("n", "<C-g>", function()
       build_t.live_grep({
         additional_args = function()
           return { "--max-depth=6" }
         end
       })
-    end, opts)
+    end, opts) ]]
 
     keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>", opts)
 
