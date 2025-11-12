@@ -41,6 +41,7 @@ return {
     -- LSP
     { "gd",         function() Snacks.picker.lsp_definitions() end,     desc = "Goto Definition" },
     { "gi",         function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "gr",         function() Snacks.picker.lsp_references() end,      nowait = true,                desc = "References" },
     -- Other
     { "<a-w>",      function() Snacks.lazygit() end,                    desc = "Lazygit" },
     { "<a-x>",      function() Snacks.bufdelete() end,                  desc = "Delete Buffer" },
