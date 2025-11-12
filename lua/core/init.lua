@@ -1,3 +1,3 @@
-require("lua.core.keymaps")
-require("lua.core.options")
-require("lua.core.autocommands")
+require("core.keymaps")
+require("core.options")
+require("core.autocommands")

@@ -15,7 +15,7 @@ return {
       group = format_sync_grp,
     })
 
-    local cmds = require('lua.custom.commands')
+    local cmds = require('custom.commands')
     --golang format
     vim.keymap.set("n", "<leader>fs", "<cmd>GoFillStruct<cr>", { desc = "fill struct" })
     vim.keymap.set("n", "<leader>ad", "<cmd>GoAddTag<cr>", { desc = "add tags" })
