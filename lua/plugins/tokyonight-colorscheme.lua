@@ -11,6 +11,6 @@ return {
         keywords = { italic = false },
       }
     })
-    vim.cmd('colorscheme tokyonight')
+    -- vim.cmd('colorscheme tokyonight')
   end,
 }
