@@ -14,6 +14,7 @@ return {
       "cssls",
       "lua_ls",
       "csharp_ls",
+      "pylsp",
     },
     -- Esta es la opción correcta para auto-setup
     automatic_installation = true,
