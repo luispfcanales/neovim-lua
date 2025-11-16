@@ -5,16 +5,18 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
   config = function()
+    local triggerKey = "<a-c>"
+
     require('Comment').setup({
       padding = true,
       sticky = true,
       toggler = {
-        line = "<A-c>",
+        line = triggerKey,
         block = "gbc",
       },
       opleader = {
-        line = "<A-c>",
-        block = "<A-c>",
+        line = triggerKey,
+        block = triggerKey,
       },
       mappings = {
         basic = true,
